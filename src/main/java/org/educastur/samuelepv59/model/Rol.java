@@ -6,6 +6,9 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -20,6 +23,10 @@ public class Rol {
     @Column(name = "nombre", nullable = false, length = 50)
     private String nombre;
 
-    @OneToMany(mappedBy = "rol")
+    @Column(name = "orden", nullable = false)
+    private Integer orden;
+
+    @OneToMany(mappedBy = "rol", fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Docente> docentes;
 }

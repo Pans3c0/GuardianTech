@@ -23,14 +23,14 @@ public class Falta {
     private String anotacion;
     private String material;
 
-    @JsonIgnore
-
     @ManyToOne
     @JoinColumn(name = "docenteId")
+    @JsonIgnore
     private Docente docente;
 
     @ManyToOne
     @JoinColumn(name = "horario")
+    @JsonIgnore
     private Horario horario;
 
 }

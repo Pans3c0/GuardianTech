@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -33,5 +35,6 @@ public class AsuntoPropio {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_docente", nullable = false)
+    @JsonIgnore
     private Docente docente;
 }

@@ -1,6 +1,8 @@
 package org.educastur.samuelepv59.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,21 +19,16 @@ public class Docente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_docente")
-    private Integer id;
+    private Long id;
 
-    @Column(name = "nombre")
     private String nombre;
 
-    @Column(name = "apellidos")
     private String apellidos;
 
-    @Column(name = "email")
     private String email;
 
-    @Column(name = "siglas")
     private String siglas;
 
-    @Column(name = "tipo")
     private String tipo;
 
     @Temporal(TemporalType.DATE)
@@ -41,19 +38,21 @@ public class Docente {
     @Column(name = "guardias_realizadas", columnDefinition = "int default 0")
     private Integer guardiasRealizadas = 0;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "id_rol")
     private Rol rol;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "id_departamento")
+    @JsonIgnore
     private Departamento departamento;
 
     @OneToMany(mappedBy = "docente")
     @JsonIgnore
     private List<AsuntoPropio> asuntosPropios;
-
-    @OneToMany(mappedBy = "docente")
     @JsonIgnore
+    @OneToMany(mappedBy = "docente")
+
     private List<Horario> horarios;
 }

@@ -24,9 +24,6 @@ public class Horario {
     @Column(name = "aula", nullable = false, length = 20)
     private String aula;
 
-    @Column(name = "tipo", nullable = false, length = 50)
-    private String tipo;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_docente", nullable = false)
     private Docente docente;

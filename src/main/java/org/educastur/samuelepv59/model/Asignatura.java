@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -28,8 +30,10 @@ public class Asignatura {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_ciclo", nullable = false)
+    @JsonIgnore
     private Ciclo ciclo;
 
     @OneToMany(mappedBy = "asignatura")
+    @JsonIgnore
     private List<Horario> horarios;
 }
