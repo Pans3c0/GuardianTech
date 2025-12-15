@@ -1,5 +1,6 @@
 package org.educastur.samuelepv59.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,8 +38,26 @@ public class DocenteController {
     }
 
     @PostMapping
-    public ResponseEntity<DocenteDTO> crear(@Valid @RequestBody DocenteCreateDTO docenteDTO) {
+    public ResponseEntity<DocenteDTO> crear(@RequestBody DocenteCreateDTO docenteDTO) {
         DocenteDTO nuevoDocente = docenteService.crearDocente(docenteDTO);
         return new ResponseEntity<>(nuevoDocente, HttpStatus.CREATED);
+    }
+
+    // Listar por apellidos
+    @GetMapping("/listar")
+    public ResponseEntity<List<DocenteDTO>> listarTodos() {
+        return ResponseEntity.ok(docenteService.listarDocentesPorApellido());
+    }
+
+    // Listar por departamento
+    @GetMapping("/departamento/{nombre}")
+    public ResponseEntity<List<DocenteDTO>> listarPorDepto(@PathVariable String nombre) {
+        return ResponseEntity.ok(docenteService.listarDocentesPorDepartamento(nombre));
+    }
+
+    // Contar por departamento
+    @GetMapping("/departamento/{codigo}/count")
+    public ResponseEntity<Long> contarPorDepto(@PathVariable String codigo) {
+        return ResponseEntity.ok(docenteService.contarProfesoresDepartamento(codigo));
     }
 }

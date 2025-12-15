@@ -3,11 +3,10 @@ package org.educastur.samuelepv59.model;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.time.LocalDate;
-import java.util.Date;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -20,21 +19,20 @@ public class AsuntoPropio {
     @Column(name = "id_asunto")
     private Integer id;
 
-    @Temporal(TemporalType.DATE)
-    @Column(name = "fecha", nullable = false)
-    private Date fecha;
+    @Column(name = "dia_solicitado")
+    private LocalDate diaSolicitado;
 
-    @Column(name = "descripcion", nullable = false, length = 255)
+    @Column(name = "descripcion", length = 255)
     private String descripcion;
 
-    @Column(name = "fecha_tramitacion", nullable = false)
-    private LocalDate fechaTramitacion;
+    @Column(name = "fecha_tramitacion")
+    private LocalDateTime fechaTramitacion;
 
-    @Column(name = "aprobado", nullable = false)
-    private boolean aprobado;
+    @Column(name = "aprobado")
+    private Boolean aprobado;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_docente", nullable = false)
+    @JoinColumn(name = "id_docente")
     @JsonIgnore
     private Docente docente;
 }
